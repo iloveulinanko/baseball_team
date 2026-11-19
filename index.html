@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>プロ野球Vロード - スカウト＆オーダー</title>
+<title>プロ野球Vロード - スカウト＆オーダー＆BOT対戦</title>
 <style>
   * {
     box-sizing: border-box;
@@ -24,7 +24,7 @@
   }
   header {
     width: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.88);
     padding: 10px 16px;
     display: flex;
     justify-content: space-between;
@@ -35,7 +35,7 @@
     z-index: 20;
   }
   .title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: bold;
     color: #ffd700;
   }
@@ -44,7 +44,7 @@
     border: 2px solid #ffd700;
     border-radius: 20px;
     padding: 4px 12px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@
   }
   .money-amount {
     color: #00ffcc;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
   .reset-btn {
     background: #444;
@@ -60,26 +60,25 @@
     border: 1px solid #777;
     border-radius: 6px;
     padding: 3px 8px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     cursor: pointer;
   }
   .reset-btn:active { background: #666; }
 
-  /* タブナビゲーション */
   .nav-tabs {
     width: 100%;
-    max-width: 960px;
+    max-width: 1020px;
     display: flex;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.65);
     border-bottom: 2px solid #444;
   }
   .tab-btn {
     flex: 1;
-    padding: 14px;
+    padding: 13px 8px;
     background: transparent;
     border: none;
     color: #aaa;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     font-weight: bold;
     cursor: pointer;
     border-bottom: 4px solid transparent;
@@ -93,19 +92,19 @@
 
   .main-container {
     width: 100%;
-    max-width: 960px;
-    padding: 16px;
+    max-width: 1020px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
   .view-section {
     width: 100%;
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
   .view-section.active {
     display: flex;
@@ -117,17 +116,17 @@
     background: radial-gradient(circle at center, #1e4d2b 0%, #0b2413 100%);
     border: 3px solid #ffd700;
     border-radius: 12px;
-    padding: 16px;
+    padding: 14px;
     text-align: center;
     box-shadow: 0 6px 16px rgba(0,0,0,0.5);
   }
   .banner h2 {
-    margin: 0 0 8px 0;
-    font-size: 1.4rem;
+    margin: 0 0 6px 0;
+    font-size: 1.35rem;
     color: #ffd700;
   }
   .banner-sub {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: #ffeb3b;
     margin-bottom: 8px;
     font-weight: bold;
@@ -136,9 +135,9 @@
     display: inline-flex;
     justify-content: center;
     gap: 14px;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     background: rgba(0, 0, 0, 0.6);
-    padding: 6px 14px;
+    padding: 5px 14px;
     border-radius: 8px;
   }
   .rate-s { color: #ff66ff; font-weight: bold; }
@@ -147,19 +146,19 @@
 
   .controls {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
   }
   .gacha-btn {
     flex: 1;
-    min-width: 200px;
-    max-width: 280px;
-    padding: 14px 16px;
+    min-width: 190px;
+    max-width: 270px;
+    padding: 13px 14px;
     border: none;
     border-radius: 12px;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
@@ -173,10 +172,7 @@
     transform: translateY(3px);
     box-shadow: 0 2px 0 rgba(0,0,0,0.4);
   }
-  .gacha-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+  .gacha-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-single {
     background: linear-gradient(180deg, #3a7bd5, #00d2ff);
     border: 2px solid #b3e5fc;
@@ -186,7 +182,7 @@
     border: 2px solid #fff59d;
   }
   .cost-tag {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     background: rgba(0,0,0,0.45);
     padding: 2px 10px;
     border-radius: 10px;
@@ -194,18 +190,18 @@
 
   .result-area {
     width: 100%;
-    min-height: 250px;
+    min-height: 260px;
     background: rgba(0, 0, 0, 0.45);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    padding: 16px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .result-title {
-    font-size: 1rem;
-    margin-bottom: 12px;
+    font-size: 0.98rem;
+    margin-bottom: 10px;
     color: #ddd;
   }
   .cards-grid {
@@ -216,16 +212,16 @@
   }
   .cards-grid.single-mode {
     grid-template-columns: 1fr;
-    max-width: 170px;
+    max-width: 185px;
   }
-  @media (max-width: 650px) {
+  @media (max-width: 680px) {
     .cards-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   .card {
     background: #222;
     border-radius: 10px;
-    padding: 10px 6px;
+    padding: 9px 7px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -244,7 +240,7 @@
     right: 4px;
     background: #ffeb3b;
     color: #000;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: bold;
     padding: 1px 4px;
     border-radius: 4px;
@@ -266,7 +262,7 @@
   }
 
   .rank-badge {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 900;
     margin-bottom: 2px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -278,35 +274,47 @@
   .pos-badge {
     display: inline-block;
     background: rgba(0,0,0,0.65);
-    padding: 2px 6px;
+    padding: 1px 6px;
     border-radius: 4px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .player-name {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: bold;
     margin-bottom: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .player-stat {
-    font-size: 0.8rem;
-    background: rgba(0,0,0,0.5);
-    padding: 3px;
-    border-radius: 4px;
-    color: #eee;
+  .stat-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(0,0,0,0.55);
+    padding: 4px 3px;
+    border-radius: 5px;
+    font-size: 0.68rem;
+    text-align: left;
+  }
+  .stat-mini-grid span {
+    white-space: nowrap;
+  }
+  .ovr-badge {
+    margin-top: 4px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #00ffcc;
   }
 
   /* オーダー編成画面 */
   .order-header-bar {
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75);
     border: 2px solid #ffd700;
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 10px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -314,12 +322,12 @@
     gap: 10px;
   }
   .team-power-box {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: bold;
   }
   .team-power-val {
     color: #00ffcc;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     margin-left: 6px;
   }
   .auto-btn {
@@ -336,15 +344,15 @@
   .order-layout {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 14px;
   }
-  @media (max-width: 720px) {
+  @media (max-width: 780px) {
     .order-layout { grid-template-columns: 1fr; }
   }
 
   .panel-box {
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.6);
     border: 1px solid #555;
     border-radius: 10px;
     padding: 12px;
@@ -353,12 +361,11 @@
     gap: 8px;
   }
   .panel-title {
-    font-size: 1rem;
+    font-size: 0.98rem;
     font-weight: bold;
     color: #ffd700;
     border-bottom: 1px solid #444;
     padding-bottom: 6px;
-    margin-bottom: 4px;
   }
 
   .slot-row {
@@ -367,23 +374,22 @@
     background: #1b2631;
     border: 2px solid #34495e;
     border-radius: 8px;
-    padding: 8px 10px;
+    padding: 7px 9px;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    gap: 10px;
+    gap: 8px;
   }
   .slot-row:hover { background: #243342; }
   .slot-row.selected {
     border-color: #00ffcc;
     background: #1c3d3d;
-    box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+    box-shadow: 0 0 8px rgba(0, 255, 204, 0.35);
   }
   .slot-label {
-    width: 68px;
+    width: 64px;
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background: #0f171e;
-    padding: 4px 6px;
+    padding: 4px 4px;
     border-radius: 6px;
     text-align: center;
     color: #bbb;
@@ -394,18 +400,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 6px;
     overflow: hidden;
+  }
+  .slot-stats-line {
+    font-size: 0.68rem;
+    color: #ccc;
+    margin-top: 2px;
   }
   .empty-slot {
     color: #777;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
   .rank-pill {
     font-weight: 900;
-    padding: 2px 7px;
+    padding: 1px 6px;
     border-radius: 4px;
-    font-size: 0.85rem;
-    margin-right: 6px;
+    font-size: 0.8rem;
+    margin-right: 4px;
   }
   .pill-S { background: #ffd700; color: #000; }
   .pill-A { background: #ff4444; color: #fff; }
@@ -416,22 +428,21 @@
     color: #ffaaaa;
     border: 1px solid #883333;
     border-radius: 4px;
-    padding: 3px 7px;
-    font-size: 0.75rem;
+    padding: 3px 6px;
+    font-size: 0.72rem;
     cursor: pointer;
-    margin-left: 8px;
+    flex-shrink: 0;
   }
 
-  /* 控え選手リスト */
   .bench-filter-info {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: #00ffcc;
     background: rgba(0, 255, 204, 0.1);
-    padding: 6px 10px;
+    padding: 6px 8px;
     border-radius: 6px;
   }
   .bench-list {
-    max-height: 460px;
+    max-height: 520px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -439,12 +450,12 @@
   }
   .bench-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 3px;
     background: #222;
     border: 1px solid #444;
     border-radius: 6px;
-    padding: 8px 10px;
+    padding: 7px 9px;
     cursor: pointer;
   }
   .bench-item:hover {
@@ -458,13 +469,170 @@
   .bench-item.mismatch {
     opacity: 0.35;
   }
-  .in-use-tag {
+  .bench-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bench-stats {
     font-size: 0.7rem;
+    color: #bbb;
+  }
+  .in-use-tag {
+    font-size: 0.68rem;
     background: #555;
     color: #fff;
-    padding: 2px 5px;
+    padding: 1px 5px;
     border-radius: 4px;
-    margin-left: 6px;
+    margin-left: 4px;
+  }
+
+  /* BOT対戦画面 */
+  .match-setup-bar {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .bot-level-select {
+    background: #222;
+    color: #fff;
+    border: 1px solid #ffd700;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  .play-btn {
+    background: linear-gradient(180deg, #ff512f, #dd2476);
+    color: #fff;
+    border: 2px solid #ffd700;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.4);
+  }
+  .play-btn:active:not(:disabled) { transform: translateY(2px); }
+  .play-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .scoreboard-card {
+    width: 100%;
+    background: #0d1b2a;
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  }
+  .inning-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ffeb3b;
+  }
+  .score-table-wrap {
+    overflow-x: auto;
+  }
+  table.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.88rem;
+  }
+  table.score-table th, table.score-table td {
+    border: 1px solid #335c67;
+    padding: 6px 4px;
+    min-width: 28px;
+  }
+  table.score-table th {
+    background: #1b263b;
+    color: #ffd700;
+  }
+  table.score-table td.team-name-cell {
+    text-align: left;
+    padding-left: 8px;
+    font-weight: bold;
+    min-width: 95px;
+    background: #14213d;
+  }
+  table.score-table td.total-cell {
+    font-weight: 900;
+    color: #00ffcc;
+    background: #14213d;
+    font-size: 1rem;
+  }
+
+  .match-log-box {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .log-list {
+    max-height: 260px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.86rem;
+  }
+  .log-entry {
+    padding: 5px 8px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid #4da6ff;
+  }
+  .log-entry.hr {
+    background: rgba(255, 215, 0, 0.18);
+    border-left-color: #ffd700;
+    color: #fff59d;
+    font-weight: bold;
+  }
+  .log-entry.run {
+    background: rgba(0, 255, 204, 0.12);
+    border-left-color: #00ffcc;
+  }
+  .log-entry.inning-hdr {
+    background: rgba(255,255,255,0.12);
+    border-left-color: #ff66ff;
+    font-weight: bold;
+    color: #ffccff;
+  }
+
+  .match-result-banner {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    display: none;
+  }
+  .match-result-banner.win {
+    display: block;
+    background: linear-gradient(90deg, #1b5e20, #4caf50);
+    border: 2px solid #b9f6ca;
+  }
+  .match-result-banner.lose {
+    display: block;
+    background: linear-gradient(90deg, #7f0000, #d32f2f);
+    border: 2px solid #ff8a80;
+  }
+  .match-result-banner.draw {
+    display: block;
+    background: linear-gradient(90deg, #37474f, #607d8b);
+    border: 2px solid #cfd8dc;
   }
 </style>
 </head>
@@ -480,16 +648,17 @@
 </header>
 
 <div class="nav-tabs">
-  <button class="tab-btn active" id="tabGacha" onclick="switchTab('gacha')">スカウト (ガチャ)</button>
-  <button class="tab-btn" id="tabOrder" onclick="switchTab('order')">オーダー編成 (<span id="orderFilledCount">0</span>/10)</button>
+  <button class="tab-btn active" id="tabGacha" onclick="switchTab('gacha')">スカウト</button>
+  <button class="tab-btn" id="tabOrder" onclick="switchTab('order')">オーダー (<span id="orderFilledCount">0</span>/10)</button>
+  <button class="tab-btn" id="tabMatch" onclick="switchTab('match')">BOT対戦</button>
 </div>
 
 <div class="main-container">
-  <!-- ガチャ画面 -->
+  <!-- 1. ガチャ画面 -->
   <div class="view-section active" id="viewGacha">
     <div class="banner">
       <h2>プロ野球ドラフトスカウト</h2>
-      <div class="banner-sub">★ 10連スカウトは10人目Aランク以上確定！ ★</div>
+      <div class="banner-sub">★ 全選手S〜Bランク対応 ／ 10連は10人目A以上確定 ★</div>
       <div class="rates">
         <span class="rate-s">Sランク: 5%</span>
         <span class="rate-a">Aランク: 15%</span>
@@ -514,27 +683,94 @@
     </div>
   </div>
 
-  <!-- オーダー編成画面 -->
+  <!-- 2. オーダー編成画面 -->
   <div class="view-section" id="viewOrder">
     <div class="order-header-bar">
       <div class="team-power-box">
-        チーム総合力:<span class="team-power-val" id="teamPower">0</span>
+        オーダー総合力:<span class="team-power-val" id="teamPower">0</span>
       </div>
       <button class="auto-btn" onclick="autoOrder()">最強オーダー自動編成</button>
     </div>
 
     <div class="order-layout">
-      <!-- 左側：スタメン＋投手枠 -->
       <div class="panel-box">
-        <div class="panel-title">現在のオーダー (枠をタップして選手を選択)</div>
+        <div class="panel-title">現在のオーダー (10枠: 野手8＋DH＋先発投手)</div>
         <div id="orderSlotsContainer"></div>
       </div>
 
-      <!-- 右側：選手ボックス -->
       <div class="panel-box">
         <div class="panel-title">所持選手一覧 (<span id="totalBoxCount">0</span>人)</div>
-        <div class="bench-filter-info" id="slotFilterInfo">左のオーダー枠を選択すると配置できます</div>
+        <div class="bench-filter-info" id="slotFilterInfo">左の枠をタップして選手を選択</div>
         <div class="bench-list" id="benchList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. BOT対戦画面 -->
+  <div class="view-section" id="viewMatch">
+    <div class="match-setup-bar">
+      <div>
+        <label for="botLevelSelect" style="font-weight:bold; margin-right:6px;">対戦BOT:</label>
+        <select id="botLevelSelect" class="bot-level-select">
+          <option value="rookie">ルーキーBOT (B中心)</option>
+          <option value="standard" selected>レギュラーBOT (A・B混合)</option>
+          <option value="allstar">オールスターBOT (S・A精鋭)</option>
+        </select>
+      </div>
+      <div id="matchConditionText" style="font-size:0.82rem; color:#ffcc80;">
+        オーダー10枠すべてに選手を配置すると試合開始できます
+      </div>
+      <button class="play-btn" id="btnStartMatch" onclick="startBotMatch()" disabled>試合開始 (全5イニング)</button>
+    </div>
+
+    <div class="match-result-banner" id="matchResultBanner"></div>
+
+    <div class="scoreboard-card">
+      <div class="inning-status">
+        <span id="inningDisplay">試合待機中</span>
+        <span id="situationDisplay">B:0 S:0 O:0</span>
+      </div>
+      <div class="score-table-wrap">
+        <table class="score-table" id="scoreTable">
+          <thead>
+            <tr>
+              <th>チーム</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="team-name-cell">自軍 (PLAYER)</td>
+              <td id="p-i1">-</td>
+              <td id="p-i2">-</td>
+              <td id="p-i3">-</td>
+              <td id="p-i4">-</td>
+              <td id="p-i5">-</td>
+              <td class="total-cell" id="p-tot">0</td>
+            </tr>
+            <tr>
+              <td class="team-name-cell" id="botTeamLabel">相手 (BOT)</td>
+              <td id="b-i1">-</td>
+              <td id="b-i2">-</td>
+              <td id="b-i3">-</td>
+              <td id="b-i4">-</td>
+              <td id="b-i5">-</td>
+              <td class="total-cell" id="b-tot">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="match-log-box">
+      <div class="panel-title" style="margin-bottom:8px;">試合実況ログ</div>
+      <div class="log-list" id="matchLogList">
+        <div class="log-entry">オーダーを組んで「試合開始」を押すと、ミート・パワー・走力・捕球・スローイング・肩力のステータスが反映された5イニング制の対戦が始まります。（勝利報酬: +300 / 引分: +100 / 敗北: +50）</div>
       </div>
     </div>
   </div>
@@ -547,51 +783,53 @@
 
   let money = INITIAL_MONEY;
   let inventory = [];
+  let isMatchRunning = false;
 
-  // 全選手マスターデータ（全選手にS・A・Bランクが存在する）
-  // ランク別能力値目安: S(88~96), A(76~83), B(62~69)
+  // 全選手マスターデータ: ミート(con), パワー(pow), 走力(spd), 捕球(fld), スローイング(thr), 肩力(arm)
+  // ランク補正: S(+14), A(+2), B(-12) を基準値に加算して全選手にS・A・Bを設定
   const MASTER_PLAYERS = [
-    { baseId: "p01", name: "大谷 翔平", pos: "投手", stats: { S: 96, A: 83, B: 69 } },
-    { baseId: "p02", name: "山本 由伸", pos: "投手", stats: { S: 95, A: 82, B: 68 } },
-    { baseId: "p03", name: "佐々木 朗希", pos: "投手", stats: { S: 94, A: 81, B: 67 } },
-    { baseId: "p04", name: "宮城 大弥", pos: "投手", stats: { S: 91, A: 79, B: 65 } },
-    { baseId: "p05", name: "今永 昇太", pos: "投手", stats: { S: 92, A: 80, B: 66 } },
-    { baseId: "p06", name: "栗林 良吏", pos: "投手", stats: { S: 90, A: 78, B: 64 } },
+    { baseId: "p01", name: "大谷 翔平", pos: "投手", base: { con: 82, pow: 85, spd: 78, fld: 68, thr: 74, arm: 86 } },
+    { baseId: "p02", name: "山本 由伸", pos: "投手", base: { con: 60, pow: 55, spd: 65, fld: 76, thr: 78, arm: 82 } },
+    { baseId: "p03", name: "佐々木 朗希", pos: "投手", base: { con: 54, pow: 58, spd: 66, fld: 66, thr: 70, arm: 85 } },
+    { baseId: "p04", name: "宮城 大弥", pos: "投手", base: { con: 56, pow: 52, spd: 62, fld: 72, thr: 73, arm: 76 } },
+    { baseId: "p05", name: "今永 昇太", pos: "投手", base: { con: 58, pow: 54, spd: 60, fld: 74, thr: 74, arm: 75 } },
+    { baseId: "p06", name: "栗林 良吏", pos: "投手", base: { con: 52, pow: 50, spd: 60, fld: 70, thr: 72, arm: 77 } },
 
-    { baseId: "c01", name: "森 友哉", pos: "捕手", stats: { S: 91, A: 79, B: 65 } },
-    { baseId: "c02", name: "甲斐 拓也", pos: "捕手", stats: { S: 89, A: 77, B: 63 } },
-    { baseId: "c03", name: "坂倉 将吾", pos: "捕手", stats: { S: 90, A: 78, B: 64 } },
+    { baseId: "c01", name: "森 友哉", pos: "捕手", base: { con: 80, pow: 76, spd: 64, fld: 77, thr: 78, arm: 80 } },
+    { baseId: "c02", name: "甲斐 拓也", pos: "捕手", base: { con: 65, pow: 68, spd: 62, fld: 82, thr: 83, arm: 85 } },
+    { baseId: "c03", name: "坂倉 将吾", pos: "捕手", base: { con: 78, pow: 74, spd: 65, fld: 73, thr: 74, arm: 76 } },
 
-    { baseId: "1b01", name: "岡本 和真", pos: "一塁手", stats: { S: 94, A: 81, B: 67 } },
-    { baseId: "1b02", name: "山川 穂高", pos: "一塁手", stats: { S: 92, A: 80, B: 66 } },
-    { baseId: "1b03", name: "浅村 栄斗", pos: "一塁手", stats: { S: 91, A: 79, B: 65 } },
+    { baseId: "1b01", name: "岡本 和真", pos: "一塁手", base: { con: 77, pow: 85, spd: 60, fld: 78, thr: 75, arm: 74 } },
+    { baseId: "1b02", name: "山川 穂高", pos: "一塁手", base: { con: 70, pow: 86, spd: 52, fld: 72, thr: 70, arm: 72 } },
+    { baseId: "1b03", name: "浅村 栄斗", pos: "一塁手", base: { con: 76, pow: 80, spd: 61, fld: 75, thr: 73, arm: 72 } },
 
-    { baseId: "2b01", name: "牧 秀悟", pos: "二塁手", stats: { S: 93, A: 81, B: 67 } },
-    { baseId: "2b02", name: "中野 拓夢", pos: "二塁手", stats: { S: 90, A: 78, B: 64 } },
-    { baseId: "2b03", name: "吉川 尚輝", pos: "二塁手", stats: { S: 89, A: 77, B: 63 } },
+    { baseId: "2b01", name: "牧 秀悟", pos: "二塁手", base: { con: 80, pow: 81, spd: 68, fld: 77, thr: 76, arm: 75 } },
+    { baseId: "2b02", name: "中野 拓夢", pos: "二塁手", base: { con: 79, pow: 62, spd: 82, fld: 79, thr: 78, arm: 72 } },
+    { baseId: "2b03", name: "吉川 尚輝", pos: "二塁手", base: { con: 77, pow: 66, spd: 80, fld: 78, thr: 77, arm: 73 } },
 
-    { baseId: "3b01", name: "村上 宗隆", pos: "三塁手", stats: { S: 95, A: 82, B: 68 } },
-    { baseId: "3b02", name: "佐藤 輝明", pos: "三塁手", stats: { S: 91, A: 79, B: 65 } },
-    { baseId: "3b03", name: "宗 佑磨", pos: "三塁手", stats: { S: 89, A: 77, B: 63 } },
+    { baseId: "3b01", name: "村上 宗隆", pos: "三塁手", base: { con: 76, pow: 86, spd: 69, fld: 72, thr: 74, arm: 79 } },
+    { baseId: "3b02", name: "佐藤 輝明", pos: "三塁手", base: { con: 72, pow: 83, spd: 72, fld: 70, thr: 72, arm: 81 } },
+    { baseId: "3b03", name: "宗 佑磨", pos: "三塁手", base: { con: 75, pow: 65, spd: 74, fld: 80, thr: 79, arm: 80 } },
 
-    { baseId: "ss01", name: "源田 壮亮", pos: "遊撃手", stats: { S: 91, A: 79, B: 65 } },
-    { baseId: "ss02", name: "長岡 秀樹", pos: "遊撃手", stats: { S: 89, A: 77, B: 63 } },
-    { baseId: "ss03", name: "紅林 弘太郎", pos: "遊撃手", stats: { S: 88, A: 76, B: 62 } },
+    { baseId: "ss01", name: "源田 壮亮", pos: "遊撃手", base: { con: 75, pow: 58, spd: 81, fld: 86, thr: 85, arm: 78 } },
+    { baseId: "ss02", name: "長岡 秀樹", pos: "遊撃手", base: { con: 77, pow: 66, spd: 73, fld: 79, thr: 78, arm: 77 } },
+    { baseId: "ss03", name: "紅林 弘太郎", pos: "遊撃手", base: { con: 73, pow: 72, spd: 68, fld: 74, thr: 75, arm: 78 } },
 
-    { baseId: "lf01", name: "近藤 健介", pos: "左翼手", stats: { S: 94, A: 82, B: 68 } },
-    { baseId: "lf02", name: "吉田 正尚", pos: "左翼手", stats: { S: 95, A: 82, B: 68 } },
-    { baseId: "lf03", name: "佐野 恵太", pos: "左翼手", stats: { S: 90, A: 78, B: 64 } },
+    { baseId: "lf01", name: "近藤 健介", pos: "左翼手", base: { con: 85, pow: 77, spd: 67, fld: 75, thr: 74, arm: 73 } },
+    { baseId: "lf02", name: "吉田 正尚", pos: "左翼手", base: { con: 84, pow: 79, spd: 70, fld: 74, thr: 73, arm: 74 } },
+    { baseId: "lf03", name: "佐野 恵太", pos: "左翼手", base: { con: 79, pow: 73, spd: 62, fld: 72, thr: 71, arm: 70 } },
 
-    { baseId: "cf01", name: "柳田 悠岐", pos: "中堅手", stats: { S: 94, A: 81, B: 67 } },
-    { baseId: "cf02", name: "周東 佑京", pos: "中堅手", stats: { S: 89, A: 77, B: 63 } },
-    { baseId: "cf03", name: "塩見 泰隆", pos: "中堅手", stats: { S: 90, A: 78, B: 64 } },
+    { baseId: "cf01", name: "柳田 悠岐", pos: "中堅手", base: { con: 81, pow: 84, spd: 76, fld: 76, thr: 77, arm: 84 } },
+    { baseId: "cf02", name: "周東 佑京", pos: "中堅手", base: { con: 71, pow: 56, spd: 90, fld: 77, thr: 76, arm: 75 } },
+    { baseId: "cf03", name: "塩見 泰隆", pos: "中堅手", base: { con: 73, pow: 74, spd: 83, fld: 75, thr: 74, arm: 76 } },
 
-    { baseId: "rf01", name: "万波 中正", pos: "右翼手", stats: { S: 92, A: 80, B: 66 } },
-    { baseId: "rf02", name: "鈴木 誠也", pos: "右翼手", stats: { S: 94, A: 81, B: 67 } },
-    { baseId: "rf03", name: "丸 佳浩", pos: "右翼手", stats: { S: 90, A: 78, B: 64 } }
+    { baseId: "rf01", name: "万波 中正", pos: "右翼手", base: { con: 72, pow: 82, spd: 77, fld: 78, thr: 79, arm: 86 } },
+    { baseId: "rf02", name: "鈴木 誠也", pos: "右翼手", base: { con: 82, pow: 84, spd: 75, fld: 77, thr: 78, arm: 83 } },
+    { baseId: "rf03", name: "丸 佳浩", pos: "右翼手", base: { con: 76, pow: 78, spd: 68, fld: 78, thr: 76, arm: 77 } }
   ];
 
-  // オーダー枠定義 (野手8ポジション + DH(全野手可) + 先発投手1 = 計10枠)
+  const RANK_DELTA = { S: 13, A: 1, B: -13 };
+
   const ORDER_SLOTS = [
     { key: "C", label: "捕手", acceptPos: ["捕手"] },
     { key: "1B", label: "一塁手", acceptPos: ["一塁手"] },
@@ -605,70 +843,84 @@
     { key: "P", label: "先発投手", acceptPos: ["投手"] }
   ];
 
-  // 各枠にセットされた選手ID (instanceId)
   let lineup = {
     C: null, "1B": null, "2B": null, "3B": null, SS: null,
     LF: null, CF: null, RF: null, DH: null, P: null
   };
   let selectedSlotKey = "C";
 
-  // タブ切り替え
-  function switchTab(tab) {
-    document.getElementById('tabGacha').classList.toggle('active', tab === 'gacha');
-    document.getElementById('tabOrder').classList.toggle('active', tab === 'order');
-    document.getElementById('viewGacha').classList.toggle('active', tab === 'gacha');
-    document.getElementById('viewOrder').classList.toggle('active', tab === 'order');
-    if (tab === 'order') {
-      renderOrderView();
-    }
+  function clampStat(val) {
+    return Math.max(30, Math.min(99, Math.round(val)));
   }
 
-  // ガチャ1回抽選 (isGuaranteedA: trueならA以上確定)
-  function drawOne(isGuaranteedA = false) {
-    const rand = Math.random() * 100;
-    let rank = 'B';
-
-    if (isGuaranteedA) {
-      // A以上確定枠: Sは5%、残り95%はA
-      if (rand < 5) {
-        rank = 'S';
-      } else {
-        rank = 'A';
-      }
-    } else {
-      // 通常枠: S 5%, A 15%, B 80%
-      if (rand < 5) {
-        rank = 'S';
-      } else if (rand < 20) {
-        rank = 'A';
-      } else {
-        rank = 'B';
-      }
+  function calcOverall(stats, pos) {
+    if (pos === "投手") {
+      // 投手は肩力・捕球・スローイング＋打撃要素
+      return Math.round((stats.arm * 0.35 + stats.fld * 0.25 + stats.thr * 0.20 + stats.con * 0.10 + stats.pow * 0.10));
     }
+    return Math.round((stats.con + stats.pow + stats.spd + stats.fld + stats.thr + stats.arm) / 6);
+  }
 
-    // 全選手からランダムに1人選び、該当ランクの能力値を適用
-    const master = MASTER_PLAYERS[Math.floor(Math.random() * MASTER_PLAYERS.length)];
+  function createPlayerInstance(master, rank, isGuaranteed = false) {
+    const delta = RANK_DELTA[rank];
+    const stats = {
+      con: clampStat(master.base.con + delta),
+      pow: clampStat(master.base.pow + delta),
+      spd: clampStat(master.base.spd + delta),
+      fld: clampStat(master.base.fld + delta),
+      thr: clampStat(master.base.thr + delta),
+      arm: clampStat(master.base.arm + delta)
+    };
     return {
-      instanceId: Date.now() + "_" + Math.random().toString(36).substr(2, 6),
+      instanceId: Date.now() + "_" + Math.random().toString(36).substr(2, 7),
       baseId: master.baseId,
       rank: rank,
       name: master.name,
       pos: master.pos,
-      power: master.stats[rank],
-      isGuaranteed: isGuaranteedA
+      stats: stats,
+      power: calcOverall(stats, master.pos),
+      isGuaranteed: isGuaranteed
     };
   }
 
-  // ガチャ実行
+  function formatStatsShort(s) {
+    return `ミ${s.con} パ${s.pow} 走${s.spd} 捕${s.fld} 送${s.thr} 肩${s.arm}`;
+  }
+
+  function switchTab(tab) {
+    if (isMatchRunning) return;
+    document.getElementById('tabGacha').classList.toggle('active', tab === 'gacha');
+    document.getElementById('tabOrder').classList.toggle('active', tab === 'order');
+    document.getElementById('tabMatch').classList.toggle('active', tab === 'match');
+    document.getElementById('viewGacha').classList.toggle('active', tab === 'gacha');
+    document.getElementById('viewOrder').classList.toggle('active', tab === 'order');
+    document.getElementById('viewMatch').classList.toggle('active', tab === 'match');
+
+    if (tab === 'order') renderOrderView();
+    if (tab === 'match') updateMatchReadyState();
+  }
+
+  function drawOne(isGuaranteedA = false) {
+    const rand = Math.random() * 100;
+    let rank = 'B';
+    if (isGuaranteedA) {
+      rank = rand < 5 ? 'S' : 'A';
+    } else {
+      if (rand < 5) rank = 'S';
+      else if (rand < 20) rank = 'A';
+      else rank = 'B';
+    }
+    const master = MASTER_PLAYERS[Math.floor(Math.random() * MASTER_PLAYERS.length)];
+    return createPlayerInstance(master, rank, isGuaranteedA);
+  }
+
   function pullGacha(times) {
     const cost = times === 10 ? COST_MULTI : COST_SINGLE;
     if (money < cost) return;
 
     money -= cost;
     const results = [];
-
     for (let i = 0; i < times; i++) {
-      // 10連の最後（index === 9）はA以上確定
       const isGuaranteedA = (times === 10 && i === 9);
       const player = drawOne(isGuaranteedA);
       results.push(player);
@@ -679,7 +931,6 @@
     updateHeaderUI();
   }
 
-  // ガチャ結果表示
   function renderGachaResults(results) {
     const grid = document.getElementById('cardsGrid');
     const title = document.getElementById('resultTitle');
@@ -694,9 +945,10 @@
     }
 
     results.forEach((player, index) => {
+      const s = player.stats;
       const card = document.createElement('div');
       card.className = `card rank-${player.rank}`;
-      card.style.animationDelay = `${index * 0.05}s`;
+      card.style.animationDelay = `${index * 0.04}s`;
 
       const guaranteeBadge = player.isGuaranteed ? `<div class="guarantee-tag">A以上確定</div>` : '';
 
@@ -705,13 +957,16 @@
         <div class="rank-badge">${player.rank}</div>
         <div><span class="pos-badge">${player.pos}</span></div>
         <div class="player-name">${player.name}</div>
-        <div class="player-stat">総合力: ${player.power}</div>
+        <div class="stat-mini-grid">
+          <span>ミ${s.con}</span><span>パ${s.pow}</span><span>走${s.spd}</span>
+          <span>捕${s.fld}</span><span>送${s.thr}</span><span>肩${s.arm}</span>
+        </div>
+        <div class="ovr-badge">総合: ${player.power}</div>
       `;
       grid.appendChild(card);
     });
   }
 
-  // オーダー画面の描画
   function renderOrderView() {
     const slotsContainer = document.getElementById('orderSlotsContainer');
     slotsContainer.innerHTML = '';
@@ -739,13 +994,16 @@
         row.innerHTML = `
           <div class="slot-label">${slot.label}</div>
           <div class="slot-player-info">
-            <div>
-              <span class="rank-pill pill-${player.rank}">${player.rank}</span>
-              <strong>${player.name}</strong>
-              <span style="font-size:0.8rem; color:#aaa;">(${player.pos})</span>
+            <div style="overflow:hidden;">
+              <div>
+                <span class="rank-pill pill-${player.rank}">${player.rank}</span>
+                <strong>${player.name}</strong>
+                <span style="font-size:0.75rem; color:#aaa;">(${player.pos})</span>
+              </div>
+              <div class="slot-stats-line">${formatStatsShort(player.stats)}</div>
             </div>
-            <div>
-              <span style="color:#00ffcc; font-weight:bold;">${player.power}</span>
+            <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+              <span style="color:#00ffcc; font-weight:bold; font-size:0.9rem;">${player.power}</span>
               <button class="remove-slot-btn" onclick="removeFromSlot(event, '${slot.key}')">外す</button>
             </div>
           </div>
@@ -765,7 +1023,6 @@
     document.getElementById('orderFilledCount').textContent = filledCount;
     document.getElementById('totalBoxCount').textContent = inventory.length;
 
-    // 選択中スロットに応じた所持選手リスト描画
     const currentSlotDef = ORDER_SLOTS.find(s => s.key === selectedSlotKey);
     document.getElementById('slotFilterInfo').textContent =
       `選択中枠: 【${currentSlotDef.label}】 (適性: ${currentSlotDef.acceptPos.join(' / ')})`;
@@ -773,7 +1030,6 @@
     const benchList = document.getElementById('benchList');
     benchList.innerHTML = '';
 
-    // 適性一致を上に、その中で総合力順にソート
     const sortedPlayers = [...inventory].sort((a, b) => {
       const aFit = currentSlotDef.acceptPos.includes(a.pos) ? 1 : 0;
       const bFit = currentSlotDef.acceptPos.includes(b.pos) ? 1 : 0;
@@ -786,7 +1042,6 @@
       return;
     }
 
-    // オーダー入りしているbaseId一覧（同名選手重複防止用）
     const usedBaseIds = new Set();
     const usedInstanceIds = new Set();
     Object.values(lineup).forEach(instId => {
@@ -797,13 +1052,12 @@
       }
     });
 
+    const currentSlotPlayer = inventory.find(x => x.instanceId === lineup[selectedSlotKey]);
+
     sortedPlayers.forEach(p => {
       const isFit = currentSlotDef.acceptPos.includes(p.pos);
       const isThisInstanceUsed = usedInstanceIds.has(p.instanceId);
       const isSameNameUsed = usedBaseIds.has(p.baseId);
-
-      // 現在選択中スロットに入っている選手自身のbaseIdは除外して判定
-      const currentSlotPlayer = inventory.find(x => x.instanceId === lineup[selectedSlotKey]);
       const isConflictName = isSameNameUsed && (!currentSlotPlayer || currentSlotPlayer.baseId !== p.baseId);
 
       const item = document.createElement('div');
@@ -814,13 +1068,16 @@
       else if (isConflictName) statusTag = '<span class="in-use-tag">同名起用中</span>';
 
       item.innerHTML = `
-        <div>
-          <span class="rank-pill pill-${p.rank}">${p.rank}</span>
-          <strong>${p.name}</strong>
-          <span style="font-size:0.8rem; color:#bbb;">[${p.pos}]</span>
-          ${statusTag}
+        <div class="bench-top">
+          <div>
+            <span class="rank-pill pill-${p.rank}">${p.rank}</span>
+            <strong>${p.name}</strong>
+            <span style="font-size:0.75rem; color:#bbb;">[${p.pos}]</span>
+            ${statusTag}
+          </div>
+          <div style="font-weight:bold; color:#00ffcc; font-size:0.88rem;">総合: ${p.power}</div>
         </div>
-        <div style="font-weight:bold; color:#00ffcc;">総合: ${p.power}</div>
+        <div class="bench-stats">${formatStatsShort(p.stats)}</div>
       `;
 
       item.onclick = () => {
@@ -832,35 +1089,30 @@
           alert(`同じ選手（${p.name}）はオーダーに複数人入れられません。`);
           return;
         }
-        // 他枠で起用中の同一カードなら元の枠から外す
         Object.keys(lineup).forEach(k => {
           if (lineup[k] === p.instanceId) lineup[k] = null;
         });
         lineup[selectedSlotKey] = p.instanceId;
         renderOrderView();
+        updateHeaderUI();
       };
 
       benchList.appendChild(item);
     });
   }
 
-  // スロットから選手を外す
   function removeFromSlot(event, slotKey) {
     event.stopPropagation();
     lineup[slotKey] = null;
     renderOrderView();
+    updateHeaderUI();
   }
 
-  // 最強オーダー自動編成
   function autoOrder() {
-    // 一旦リセット
     Object.keys(lineup).forEach(k => lineup[k] = null);
     const usedBaseIds = new Set();
-
-    // 総合力順にソートした所持選手リスト
     const sorted = [...inventory].sort((a, b) => b.power - a.power);
 
-    // まずDH以外の固定ポジション(9枠)を埋める
     ORDER_SLOTS.filter(s => s.key !== 'DH').forEach(slot => {
       const candidate = sorted.find(p =>
         slot.acceptPos.includes(p.pos) && !usedBaseIds.has(p.baseId)
@@ -871,7 +1123,6 @@
       }
     });
 
-    // 最後に残った野手から一番強い選手をDHに入れる
     const dhSlot = ORDER_SLOTS.find(s => s.key === 'DH');
     const dhCandidate = sorted.find(p =>
       dhSlot.acceptPos.includes(p.pos) && !usedBaseIds.has(p.baseId)
@@ -882,9 +1133,357 @@
     }
 
     renderOrderView();
+    updateHeaderUI();
   }
 
-  // ヘッダーUI更新
+  function getFilledLineupPlayers() {
+    const map = {};
+    for (const slot of ORDER_SLOTS) {
+      const p = inventory.find(x => x.instanceId === lineup[slot.key]);
+      if (!p) return null;
+      map[slot.key] = p;
+    }
+    return map;
+  }
+
+  function updateMatchReadyState() {
+    const filled = getFilledLineupPlayers();
+    const btn = document.getElementById('btnStartMatch');
+    const info = document.getElementById('matchConditionText');
+
+    if (isMatchRunning) {
+      btn.disabled = true;
+      info.textContent = '試合進行中...';
+      return;
+    }
+
+    if (filled) {
+      btn.disabled = false;
+      info.textContent = 'オーダー準備完了！対戦相手を選んで開始しよう';
+      info.style.color = '#00ffcc';
+    } else {
+      btn.disabled = true;
+      info.textContent = 'オーダー全10枠に選手を配置すると試合開始できます';
+      info.style.color = '#ffcc80';
+    }
+  }
+
+  // BOTオーダー生成
+  function buildBotLineup(level) {
+    const botMap = {};
+    const usedBase = new Set();
+
+    function pickRank() {
+      const r = Math.random() * 100;
+      if (level === 'rookie') return r < 5 ? 'A' : 'B';
+      if (level === 'allstar') return r < 45 ? 'S' : 'A';
+      // standard
+      if (r < 12) return 'S';
+      if (r < 50) return 'A';
+      return 'B';
+    }
+
+    ORDER_SLOTS.forEach(slot => {
+      const candidates = MASTER_PLAYERS.filter(m =>
+        slot.acceptPos.includes(m.pos) && !usedBase.has(m.baseId)
+      );
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      usedBase.add(chosen.baseId);
+      botMap[slot.key] = createPlayerInstance(chosen, pickRank());
+    });
+
+    return botMap;
+  }
+
+  // 1打席シミュレーション（ミート・パワー・走力・捕球・スローイング・肩力を反映）
+  function simPlateAppearance(batter, pitcher, defenseMap, runners) {
+    const s = batter.stats;
+    const p = pitcher.stats;
+
+    // チーム守備指標（捕球・スローイング・肩力の平均）
+    const fielders = Object.values(defenseMap);
+    const avgFld = fielders.reduce((acc, x) => acc + x.stats.fld, 0) / fielders.length;
+    const avgThr = fielders.reduce((acc, x) => acc + x.stats.thr, 0) / fielders.length;
+    const avgArm = fielders.reduce((acc, x) => acc + x.stats.arm, 0) / fielders.length;
+
+    // 投手の抑え込み力（肩力・捕球・スローイングから算出）
+    const pitchPower = p.arm * 0.55 + p.fld * 0.25 + p.thr * 0.20;
+
+    // 接触・安打率: ミート vs 投手力・捕球
+    const contactScore = s.con - pitchPower * 0.65 - (avgFld - 70) * 0.25;
+    const hitProb = Math.max(0.14, Math.min(0.46, 0.28 + contactScore * 0.0045));
+
+    // 長打・本塁打率: パワー vs 投手肩力
+    const powerEdge = (s.pow - p.arm) * 0.0022;
+    const hrProb = Math.max(0.01, Math.min(0.16, 0.045 + (s.pow - 65) * 0.0022 + powerEdge));
+
+    // エラー率: 守備の捕球力が低いほどエラー発生
+    const errorProb = Math.max(0.01, Math.min(0.09, 0.035 + (72 - avgFld) * 0.0018));
+
+    const roll = Math.random();
+
+    // 本塁打
+    if (roll < hrProb) {
+      let runs = 1;
+      if (runners[2]) runs++;
+      if (runners[1]) runs++;
+      if (runners[0]) runs++;
+      return {
+        type: 'HR',
+        runs: runs,
+        nextRunners: [false, false, false],
+        text: `${batter.name} (${batter.pos}) が右中間へ特大ホームラン！` + (runs > 1 ? ` (${runs}点)` : ' (ソロ)')
+      };
+    }
+
+    // 守備エラー出塁
+    if (roll < hrProb + errorProb) {
+      let runs = 0;
+      const next = [true, runners[0], runners[1]];
+      if (runners[2]) {
+        runs++;
+      }
+      return {
+        type: 'ERR',
+        runs: runs,
+        nextRunners: next,
+        text: `${batter.name} の打球を相手守備がエラー！出塁` + (runs > 0 ? `、${runs}点追加` : '')
+      };
+    }
+
+    // 安打（単打 / 二塁打）
+    if (roll < hrProb + errorProb + hitProb) {
+      const is2B = Math.random() < Math.max(0.12, Math.min(0.38, 0.20 + (s.pow + s.spd - 140) * 0.0025));
+      let runs = 0;
+      const next = [false, false, false];
+
+      if (is2B) {
+        // 二塁打: 三塁・二塁走者生還、一塁走者は走力＆外野肩力/スローイング勝負
+        if (runners[2]) runs++;
+        if (runners[1]) runs++;
+        if (runners[0]) {
+          const advanceChance = 0.55 + (s.spd - (avgArm + avgThr) / 2) * 0.008;
+          if (Math.random() < advanceChance) {
+            runs++;
+          } else {
+            next[2] = true;
+          }
+        }
+        next[1] = true;
+        return {
+          type: '2B',
+          runs: runs,
+          nextRunners: next,
+          text: `${batter.name} が鋭いツーベースヒット！` + (runs > 0 ? ` ${runs}点獲得！` : '')
+        };
+      } else {
+        // 単打: 三塁走者は生還、二塁走者は走力 vs 肩力/スローイングで判定
+        if (runners[2]) runs++;
+        if (runners[1]) {
+          const scoreChance = 0.62 + (s.spd - (avgArm * 0.6 + avgThr * 0.4)) * 0.009;
+          if (Math.random() < scoreChance) {
+            runs++;
+          } else {
+            next[2] = true;
+          }
+        }
+        if (runners[0]) {
+          next[1] = true;
+        }
+        next[0] = true;
+        return {
+          type: '1B',
+          runs: runs,
+          nextRunners: next,
+          text: `${batter.name} がセンター前ヒット！` + (runs > 0 ? ` ${runs}点先制/追加！` : '')
+        };
+      }
+    }
+
+    // アウト（ゴロ / フライ / 三振）
+    const outRoll = Math.random();
+    if (outRoll < 0.35) {
+      return {
+        type: 'K',
+        runs: 0,
+        nextRunners: runners,
+        text: `${batter.name} は見逃し/空振り三振。`
+      };
+    } else if (outRoll < 0.72) {
+      return {
+        type: 'GO',
+        runs: 0,
+        nextRunners: runners,
+        text: `${batter.name} は内野ゴロに倒れる。`
+      };
+    } else {
+      // フライアウト：走力が高く三塁走者がいればタッチアップのチャンス
+      if (runners[2] && s.spd >= 72 && Math.random() < 0.55 + (s.spd - avgArm) * 0.008) {
+        const next = [runners[0], runners[1], false];
+        return {
+          type: 'SF',
+          runs: 1,
+          nextRunners: next,
+          text: `${batter.name} の犠牲フライ！走力${s.spd}の三塁走者が生還！(1点)`
+        };
+      }
+      return {
+        type: 'FO',
+        runs: 0,
+        nextRunners: runners,
+        text: `${batter.name} は外野フライに打ち取られる。`
+      };
+    }
+  }
+
+  function appendLog(html, cls = '') {
+    const list = document.getElementById('matchLogList');
+    const div = document.createElement('div');
+    div.className = `log-entry ${cls}`;
+    div.innerHTML = html;
+    list.appendChild(div);
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function clearScoreboard() {
+    for (let i = 1; i <= 5; i++) {
+      document.getElementById(`p-i${i}`).textContent = '-';
+      document.getElementById(`b-i${i}`).textContent = '-';
+    }
+    document.getElementById('p-tot').textContent = '0';
+    document.getElementById('b-tot').textContent = '0';
+    const banner = document.getElementById('matchResultBanner');
+    banner.className = 'match-result-banner';
+    banner.style.display = 'none';
+    banner.textContent = '';
+  }
+
+  const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+
+  async function startBotMatch() {
+    const playerMap = getFilledLineupPlayers();
+    if (!playerMap || isMatchRunning) return;
+
+    isMatchRunning = true;
+    updateMatchReadyState();
+    clearScoreboard();
+    document.getElementById('matchLogList').innerHTML = '';
+
+    const botLevel = document.getElementById('botLevelSelect').value;
+    const botMap = buildBotLineup(botLevel);
+    const botLabelMap = {
+      rookie: 'ルーキーBOT',
+      standard: 'レギュラーBOT',
+      allstar: 'オールスターBOT'
+    };
+    document.getElementById('botTeamLabel').textContent = botLabelMap[botLevel];
+
+    // 打順（C, 1B, 2B, 3B, SS, LF, CF, RF, DH の9人打順）
+    const battingKeys = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH'];
+    const pBatters = battingKeys.map(k => playerMap[k]);
+    const bBatters = battingKeys.map(k => botMap[k]);
+    const pPitcher = playerMap['P'];
+    const bPitcher = botMap['P'];
+
+    let pBatIdx = 0;
+    let bBatIdx = 0;
+    let pTotal = 0;
+    let bTotal = 0;
+
+    appendLog(`試合開始！自軍先発: ${pPitcher.name}(${pPitcher.rank}) vs ${botLabelMap[botLevel]}先発: ${bPitcher.name}(${bPitcher.rank})`, 'inning-hdr');
+
+    for (let inning = 1; inning <= 5; inning++) {
+      // --- 表: 自軍の攻撃 ---
+      document.getElementById('inningDisplay').textContent = `${inning}回 表 (自軍攻撃)`;
+      appendLog(`--- ${inning}回 表：自軍の攻撃 ---`, 'inning-hdr');
+
+      let outs = 0;
+      let runners = [false, false, false];
+      let inningRunsP = 0;
+
+      while (outs < 3) {
+        const batter = pBatters[pBatIdx % pBatters.length];
+        pBatIdx++;
+        document.getElementById('situationDisplay').textContent = `アウト: ${outs} | 走者: ${runners.map((r, idx) => r ? (idx+1)+'塁' : '').filter(Boolean).join(',') || 'なし'}`;
+
+        const res = simPlateAppearance(batter, bPitcher, botMap, runners);
+        runners = res.nextRunners;
+        inningRunsP += res.runs;
+        pTotal += res.runs;
+
+        const logCls = res.type === 'HR' ? 'hr' : (res.runs > 0 ? 'run' : '');
+        appendLog(res.text, logCls);
+
+        if (res.type === '1B' || res.type === '2B' || res.type === 'HR' || res.type === 'ERR' || res.type === 'SF') {
+          // 進塁・アウトなし
+        } else {
+          outs++;
+        }
+
+        document.getElementById(`p-i${inning}`).textContent = inningRunsP;
+        document.getElementById('p-tot').textContent = pTotal;
+        await sleep(220);
+      }
+
+      // --- 裏: BOTの攻撃 ---
+      document.getElementById('inningDisplay').textContent = `${inning}回 裏 (BOT攻撃)`;
+      appendLog(`--- ${inning}回 裏：${botLabelMap[botLevel]}の攻撃 ---`, 'inning-hdr');
+
+      outs = 0;
+      runners = [false, false, false];
+      let inningRunsB = 0;
+
+      while (outs < 3) {
+        const batter = bBatters[bBatIdx % bBatters.length];
+        bBatIdx++;
+        document.getElementById('situationDisplay').textContent = `アウト: ${outs} | 走者: ${runners.map((r, idx) => r ? (idx+1)+'塁' : '').filter(Boolean).join(',') || 'なし'}`;
+
+        const res = simPlateAppearance(batter, pPitcher, playerMap, runners);
+        runners = res.nextRunners;
+        inningRunsB += res.runs;
+        bTotal += res.runs;
+
+        const logCls = res.type === 'HR' ? 'hr' : (res.runs > 0 ? 'run' : '');
+        appendLog(`[BOT] ${res.text}`, logCls);
+
+        if (res.type === '1B' || res.type === '2B' || res.type === 'HR' || res.type === 'ERR' || res.type === 'SF') {
+          // 進塁・アウトなし
+        } else {
+          outs++;
+        }
+
+        document.getElementById(`b-i${inning}`).textContent = inningRunsB;
+        document.getElementById('b-tot').textContent = bTotal;
+        await sleep(220);
+      }
+    }
+
+    document.getElementById('inningDisplay').textContent = `試合終了`;
+    document.getElementById('situationDisplay').textContent = `スコア ${pTotal} - ${bTotal}`;
+
+    const banner = document.getElementById('matchResultBanner');
+    let reward = 0;
+    if (pTotal > bTotal) {
+      reward = 300;
+      banner.className = 'match-result-banner win';
+      banner.textContent = `勝利！ ${pTotal} - ${bTotal} （報酬 +${reward} 獲得）`;
+    } else if (pTotal < bTotal) {
+      reward = 50;
+      banner.className = 'match-result-banner lose';
+      banner.textContent = `敗北… ${pTotal} - ${bTotal} （参加賞 +${reward} 獲得）`;
+    } else {
+      reward = 100;
+      banner.className = 'match-result-banner draw';
+      banner.textContent = `引き分け ${pTotal} - ${bTotal} （報酬 +${reward} 獲得）`;
+    }
+    banner.style.display = 'block';
+
+    money += reward;
+    updateHeaderUI();
+    isMatchRunning = false;
+    updateMatchReadyState();
+  }
+
   function updateHeaderUI() {
     document.getElementById('moneyDisplay').textContent = money;
     document.getElementById('btnSingle').disabled = money < COST_SINGLE;
@@ -895,18 +1494,21 @@
     document.getElementById('orderFilledCount').textContent = filled;
   }
 
-  // リセット
   function resetData() {
+    if (isMatchRunning) return;
     money = INITIAL_MONEY;
     inventory = [];
     Object.keys(lineup).forEach(k => lineup[k] = null);
     document.getElementById('cardsGrid').innerHTML = '';
     document.getElementById('resultTitle').textContent = 'スカウトボタンを押して選手を獲得しよう！';
+    clearScoreboard();
     updateHeaderUI();
     renderOrderView();
+    updateMatchReadyState();
   }
 
   updateHeaderUI();
+  updateMatchReadyState();
 </script>
 </body>
 </html>
