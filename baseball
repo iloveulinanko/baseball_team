@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>プロ野球Vロード - スカウトガチャ</title>
+<style>
+  * {
+    box-sizing: border-box;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #d4af37;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ffd700;
+  }
+  .money-box {
+    background: #111;
+    border: 2px solid #ffd700;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .money-amount {
+    color: #00ffcc;
+    font-size: 1.3rem;
+  }
+  .reset-btn {
+    background: #444;
+    color: #fff;
+    border: 1px solid #777;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .reset-btn:active {
+    background: #666;
+  }
+  .main-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .banner {
+    width: 100%;
+    background: radial-gradient(circle at center, #1e4d2b 0%, #0b2413 100%);
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  }
+  .banner h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.6rem;
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+  .rates {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-flex;
+  }
+  .rate-s { color: #ff66ff; font-weight: bold; }
+  .rate-a { color: #ff4444; font-weight: bold; }
+  .rate-b { color: #4da6ff; font-weight: bold; }
+
+  .controls {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .gacha-btn {
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.4);
+    transition: transform 0.1s, box-shadow 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .gacha-btn:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+  }
+  .gacha-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-single {
+    background: linear-gradient(180deg, #3a7bd5, #00d2ff);
+    border: 2px solid #b3e5fc;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  }
+  .btn-multi {
+    background: linear-gradient(180deg, #f12711, #f5af19);
+    border: 2px solid #fff59d;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  }
+  .cost-tag {
+    font-size: 0.9rem;
+    background: rgba(0,0,0,0.4);
+    padding: 2px 12px;
+    border-radius: 12px;
+  }
+
+  .result-area {
+    width: 100%;
+    min-height: 280px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .result-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #ddd;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    width: 100%;
+  }
+  .cards-grid.single-mode {
+    grid-template-columns: 1fr;
+    max-width: 180px;
+  }
+  @media (max-width: 650px) {
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .card {
+    background: #222;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  @keyframes popIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ランク別デザイン */
+  .rank-S {
+    background: linear-gradient(135deg, #ff00cc, #333399, #ffd700);
+    border: 3px solid #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  }
+  .rank-A {
+    background: linear-gradient(135deg, #8e0e00, #1f1c18);
+    border: 3px solid #ff4444;
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+  }
+  .rank-B {
+    background: linear-gradient(135deg, #1c3b57, #0f1c29);
+    border: 2px solid #4da6ff;
+  }
+
+  .rank-badge {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+  .rank-S .rank-badge { color: #ffd700; }
+  .rank-A .rank-badge { color: #ff6666; }
+  .rank-B .rank-badge { color: #66b3ff; }
+
+  .pos-badge {
+    display: inline-block;
+    background: rgba(0,0,0,0.6);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .player-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player-stat {
+    font-size: 0.85rem;
+    background: rgba(0,0,0,0.5);
+    padding: 4px;
+    border-radius: 4px;
+    color: #eee;
+  }
+
+  /* 獲得済み選手一覧 */
+  .roster-section {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    padding: 15px 20px;
+  }
+  .roster-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 8px;
+  }
+  .roster-counts {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+  }
+  .roster-list {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .roster-item {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #222;
+    border: 1px solid #555;
+  }
+  .roster-item.s { border-color: #ffd700; color: #ffd700; }
+  .roster-item.a { border-color: #ff4444; color: #ff8888; }
+  .roster-item.b { border-color: #4da6ff; color: #99ccff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title">⚾ Vロード スカウト</div>
+  <div class="money-box">
+    <span>資金:</span>
+    <span class="money-amount" id="moneyDisplay">10000</span>
+    <button class="reset-btn" onclick="resetData()">リセット</button>
+  </div>
+</header>
+
+<div class="main-container">
+  <div class="banner">
+    <h2>ドラフトスカウト</h2>
+    <div class="rates">
+      <span class="rate-s">Sランク: 5%</span>
+      <span class="rate-a">Aランク: 15%</span>
+      <span class="rate-b">Bランク: 80%</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="gacha-btn btn-single" id="btnSingle" onclick="pullGacha(1)">
+      <span>1回スカウト</span>
+      <span class="cost-tag">消費: 25</span>
+    </button>
+    <button class="gacha-btn btn-multi" id="btnMulti" onclick="pullGacha(10)">
+      <span>10連スカウト</span>
+      <span class="cost-tag">消費: 250</span>
+    </button>
+  </div>
+
+  <div class="result-area">
+    <div class="result-title" id="resultTitle">スカウトボタンを押して選手を獲得しよう！</div>
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <div class="roster-section">
+    <div class="roster-header">
+      <span>獲得選手ボックス (<span id="totalCount">0</span>人)</span>
+      <div class="roster-counts">
+        <span class="rate-s">S: <span id="countS">0</span></span>
+        <span class="rate-a">A: <span id="countA">0</span></span>
+        <span class="rate-b">B: <span id="countB">0</span></span>
+      </div>
+    </div>
+    <div class="roster-list" id="rosterList"></div>
+  </div>
+</div>
+
+<script>
+  // 初期設定
+  const INITIAL_MONEY = 10000;
+  const COST_SINGLE = 25;
+  const COST_MULTI = 250;
+
+  let money = INITIAL_MONEY;
+  let inventory = [];
+
+  // 選手データベース（オーダー作成を見据えたポジション・能力値付き）
+  const PLAYER_POOL = {
+    S: [
+      { name: "大谷 翔平", pos: "投手/DH", power: 98 },
+      { name: "村上 宗隆", pos: "三塁手", power: 95 },
+      { name: "山本 由伸", pos: "投手", power: 96 },
+      { name: "柳田 悠岐", pos: "中堅手", power: 94 },
+      { name: "岡本 和真", pos: "一塁手", power: 93 },
+      { name: "佐々木 朗希", pos: "投手", power: 95 },
+      { name: "近藤 健介", pos: "左翼手", power: 92 },
+      { name: "源田 壮亮", pos: "遊撃手", power: 90 }
+    ],
+    A: [
+      { name: "牧 秀悟", pos: "二塁手", power: 84 },
+      { name: "森 友哉", pos: "捕手", power: 83 },
+      { name: "万波 中正", pos: "右翼手", power: 82 },
+      { name: "宮城 大弥", pos: "投手", power: 84 },
+      { name: "佐藤 輝明", pos: "三塁手", power: 81 },
+      { name: "今永 昇太", pos: "投手", power: 85 },
+      { name: "中野 拓夢", pos: "二塁手", power: 80 },
+      { name: "栗林 良吏", pos: "投手", power: 82 },
+      { name: "浅村 栄斗", pos: "一塁手", power: 83 },
+      { name: "周東 佑京", pos: "中堅手", power: 79 }
+    ],
+    B: [
+      { name: "佐藤 健太", pos: "投手", power: 65 },
+      { name: "鈴木 誠", pos: "捕手", power: 62 },
+      { name: "高橋 大輔", pos: "一塁手", power: 66 },
+      { name: "田中 翔", pos: "二塁手", power: 64 },
+      { name: "伊藤 蓮", pos: "三塁手", power: 65 },
+      { name: "渡辺 陸", pos: "遊撃手", power: 63 },
+      { name: "山本 颯太", pos: "左翼手", power: 64 },
+      { name: "中村 陽向", pos: "中堅手", power: 65 },
+      { name: "小林 樹", pos: "右翼手", power: 62 },
+      { name: "加藤 翼", pos: "投手", power: 61 },
+      { name: "吉田 悠斗", pos: "投手", power: 63 },
+      { name: "山田 蒼空", pos: "遊撃手", power: 60 }
+    ]
+  };
+
+  // UI更新
+  function updateUI() {
+    document.getElementById('moneyDisplay').textContent = money;
+    document.getElementById('btnSingle').disabled = money < COST_SINGLE;
+    document.getElementById('btnMulti').disabled = money < COST_MULTI;
+
+    // ボックス集計
+    let sCount = 0, aCount = 0, bCount = 0;
+    const rosterList = document.getElementById('rosterList');
+    rosterList.innerHTML = '';
+
+    // S -> A -> B の順にソートして表示
+    const rankOrder = { S: 1, A: 2, B: 3 };
+    const sortedInventory = [...inventory].sort((a, b) => rankOrder[a.rank] - rankOrder[b.rank] || b.power - a.power);
+
+    sortedInventory.forEach(p => {
+      if (p.rank === 'S') sCount++;
+      if (p.rank === 'A') aCount++;
+      if (p.rank === 'B') bCount++;
+
+      const item = document.createElement('div');
+      item.className = `roster-item ${p.rank.toLowerCase()}`;
+      item.textContent = `[${p.rank}] ${p.name} (${p.pos} / 総合:${p.power})`;
+      rosterList.appendChild(item);
+    });
+
+    document.getElementById('totalCount').textContent = inventory.length;
+    document.getElementById('countS').textContent = sCount;
+    document.getElementById('countA').textContent = aCount;
+    document.getElementById('countB').textContent = bCount;
+  }
+
+  // 確率抽選ロジック (S: 5%, A: 15%, B: 80%)
+  function drawOne() {
+    const rand = Math.random() * 100;
+    let rank = 'B';
+    if (rand < 5) {
+      rank = 'S';
+    } else if (rand < 20) { // 5 + 15 = 20
+      rank = 'A';
+    }
+
+    const pool = PLAYER_POOL[rank];
+    const basePlayer = pool[Math.floor(Math.random() * pool.length)];
+
+    return {
+      id: Date.now() + Math.random(),
+      rank: rank,
+      name: basePlayer.name,
+      pos: basePlayer.pos,
+      power: basePlayer.power
+    };
+  }
+
+  // ガチャ実行
+  function pullGacha(times) {
+    const cost = times === 10 ? COST_MULTI : COST_SINGLE;
+    if (money < cost) return;
+
+    money -= cost;
+    const results = [];
+
+    for (let i = 0; i < times; i++) {
+      const player = drawOne();
+      results.push(player);
+      inventory.push(player);
+    }
+
+    renderResults(results);
+    updateUI();
+  }
+
+  // 結果カード描画
+  function renderResults(results) {
+    const grid = document.getElementById('cardsGrid');
+    const title = document.getElementById('resultTitle');
+    grid.innerHTML = '';
+
+    if (results.length === 1) {
+      grid.classList.add('single-mode');
+      title.textContent = 'スカウト結果 (1回)';
+    } else {
+      grid.classList.remove('single-mode');
+      title.textContent = 'スカウト結果 (10連)';
+    }
+
+    results.forEach((player, index) => {
+      const card = document.createElement('div');
+      card.className = `card rank-${player.rank}`;
+      card.style.animationDelay = `${index * 0.06}s`;
+
+      card.innerHTML = `
+        <div class="rank-badge">${player.rank}</div>
+        <div><span class="pos-badge">${player.pos}</span></div>
+        <div class="player-name">${player.name}</div>
+        <div class="player-stat">総合力: ${player.power}</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // テスト用リセット
+  function resetData() {
+    money = INITIAL_MONEY;
+    inventory = [];
+    document.getElementById('cardsGrid').innerHTML = '';
+    document.getElementById('resultTitle').textContent = 'スカウトボタンを押して選手を獲得しよう！';
+    updateUI();
+  }
+
+  // 初期表示
+  updateUI();
+</script>
+</body>
+</html>
