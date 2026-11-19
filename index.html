@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>プロ野球Vロード - スカウト＆オーダー＆限界突破＆売却＆BOT対戦</title>
+<title>プロ野球Vロード - スカウト＆オーダー＆限界突破＆ミキサー＆BOT対戦</title>
 <style>
   * {
     box-sizing: border-box;
@@ -69,7 +69,7 @@
 
   .nav-tabs {
     width: 100%;
-    max-width: 1120px;
+    max-width: 1140px;
     display: flex;
     background: rgba(0, 0, 0, 0.65);
     border-bottom: 2px solid #444;
@@ -77,12 +77,12 @@
   }
   .tab-btn {
     flex: 1;
-    min-width: 90px;
-    padding: 12px 6px;
+    min-width: 84px;
+    padding: 12px 5px;
     background: transparent;
     border: none;
     color: #aaa;
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     font-weight: bold;
     cursor: pointer;
     border-bottom: 4px solid transparent;
@@ -97,7 +97,7 @@
 
   .main-container {
     width: 100%;
-    max-width: 1120px;
+    max-width: 1140px;
     padding: 14px;
     display: flex;
     flex-direction: column;
@@ -340,13 +340,24 @@
     gap: 10px;
   }
   .team-power-box {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .team-power-val {
     color: #00ffcc;
     font-size: 1.35rem;
-    margin-left: 6px;
+  }
+  .combo-bonus-pill {
+    background: rgba(255, 215, 0, 0.2);
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    font-size: 0.82rem;
+    padding: 2px 8px;
+    border-radius: 12px;
   }
   .auto-btn {
     background: linear-gradient(180deg, #28a745, #1e7e34);
@@ -358,6 +369,67 @@
     cursor: pointer;
   }
   .auto-btn:active { transform: translateY(2px); }
+
+  .combo-panel {
+    width: 100%;
+    background: rgba(15, 25, 40, 0.85);
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .combo-panel-title {
+    font-size: 0.92rem;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .combo-active-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .combo-chip {
+    background: rgba(0, 255, 204, 0.14);
+    border: 1px solid #00ffcc;
+    color: #e0fffa;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  .combo-chip.star4 {
+    background: linear-gradient(90deg, rgba(255, 0, 204, 0.3), rgba(255, 215, 0, 0.35));
+    border: 1px solid #ffd700;
+    color: #fff59d;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.45);
+  }
+  .combo-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    font-size: 0.74rem;
+    color: #bbb;
+  }
+  @media (max-width: 720px) {
+    .combo-guide-grid { grid-template-columns: 1fr; }
+  }
+  .combo-guide-item {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 3px solid #666;
+  }
+  .combo-guide-item.is-on {
+    border-left-color: #00ffcc;
+    color: #fff;
+    background: rgba(0, 255, 204, 0.08);
+  }
 
   .order-layout {
     width: 100%;
@@ -616,6 +688,79 @@
     font-weight: bold;
   }
 
+  /* ミキサー画面 */
+  .mixer-mode-bar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 720px) {
+    .mixer-mode-bar { grid-template-columns: 1fr; }
+  }
+  .mixer-mode-btn {
+    background: #1b2631;
+    border: 2px solid #455a64;
+    border-radius: 10px;
+    padding: 10px;
+    color: #ddd;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mixer-mode-btn.active {
+    border-color: #ff66ff;
+    background: rgba(156, 39, 176, 0.22);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 102, 255, 0.35);
+  }
+  .mixer-layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 14px;
+  }
+  @media (max-width: 780px) {
+    .mixer-layout { grid-template-columns: 1fr; }
+  }
+  .mixer-select-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    border: 2px solid #444;
+    border-radius: 7px;
+    padding: 7px 9px;
+    cursor: pointer;
+    gap: 6px;
+  }
+  .mixer-select-item:hover { border-color: #90caf9; }
+  .mixer-select-item.picked {
+    border-color: #00ffcc;
+    background: #173838;
+  }
+  .mixer-select-item.disabled-item {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .mixer-exec-btn {
+    background: linear-gradient(180deg, #ab47bc, #6a1b9a);
+    color: #fff;
+    border: 2px solid #f3e5f5;
+    border-radius: 10px;
+    padding: 11px 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.4);
+  }
+  .mixer-exec-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
   /* BOT対戦画面 */
   .match-setup-bar {
     width: 100%;
@@ -778,6 +923,7 @@
   <button class="tab-btn active" id="tabGacha" onclick="switchTab('gacha')">スカウト</button>
   <button class="tab-btn" id="tabOrder" onclick="switchTab('order')">オーダー (<span id="orderFilledCount">0</span>/12)</button>
   <button class="tab-btn" id="tabManage" onclick="switchTab('manage')">限界突破・売却</button>
+  <button class="tab-btn" id="tabMixer" onclick="switchTab('mixer')">ミキサー</button>
   <button class="tab-btn" id="tabMatch" onclick="switchTab('match')">BOT対戦</button>
 </div>
 
@@ -815,9 +961,21 @@
   <div class="view-section" id="viewOrder">
     <div class="order-header-bar">
       <div class="team-power-box">
-        オーダー総合力:<span class="team-power-val" id="teamPower">0</span>
+        <span>オーダー総合力:</span>
+        <span class="team-power-val" id="teamPower">0</span>
+        <span class="combo-bonus-pill" id="comboBonusBadge">コンボ +0</span>
       </div>
       <button class="auto-btn" onclick="autoOrder()">最強オーダー自動編成</button>
+    </div>
+
+    <!-- コンボ一覧・発動状況パネル -->
+    <div class="combo-panel">
+      <div class="combo-panel-title">
+        <span>発動中コンボ（⭐︎1:+20 / ⭐︎2:+40 / ⭐︎3:+80 / ⭐︎4:+200）</span>
+        <span style="font-size:0.78rem; color:#00ffcc;" id="comboTotalText">合計 +0</span>
+      </div>
+      <div class="combo-active-list" id="activeCombosList"></div>
+      <div class="combo-guide-grid" id="comboGuideGrid"></div>
     </div>
 
     <div class="order-layout">
@@ -852,7 +1010,41 @@
     </div>
   </div>
 
-  <!-- 4. BOT対戦画面 -->
+  <!-- 4. ミキサー画面 -->
+  <div class="view-section" id="viewMixer">
+    <div class="mixer-mode-bar">
+      <button class="mixer-mode-btn active" id="modeS3" onclick="setMixerMode('s3')">
+        <strong>Sランクミキサー</strong>
+        <span style="font-size:0.76rem; color:#ff80ab;">Sランク3枚 → 別のSランク1枚</span>
+      </button>
+      <button class="mixer-mode-btn" id="modeA5" onclick="setMixerMode('a5')">
+        <strong>Aランクミキサー</strong>
+        <span style="font-size:0.76rem; color:#ff8a80;">Aランク5枚 → A(80%) or S(20%) 1枚</span>
+      </button>
+      <button class="mixer-mode-btn" id="modeB8" onclick="setMixerMode('b8')">
+        <strong>Bランクミキサー</strong>
+        <span style="font-size:0.76rem; color:#82b1ff;">Bランク8枚 → B(75%) or A(25%) 1枚</span>
+      </button>
+    </div>
+
+    <div class="mixer-layout">
+      <div class="panel-box">
+        <div class="panel-title" id="mixerCandidateTitle">投入する選手を選択 (0 / 3枚)</div>
+        <div class="bench-list" id="mixerCandidateList"></div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-title">ミキサー合成</div>
+        <div id="mixerRuleDesc" style="font-size:0.84rem; color:#ddd; line-height:1.5;"></div>
+        <div id="mixerPickedSummary" style="background:rgba(0,0,0,0.4); padding:8px; border-radius:8px; font-size:0.82rem; min-height:68px;"></div>
+        <button class="mixer-exec-btn" id="btnExecMixer" onclick="executeMixer()" disabled>ミキサーを実行する</button>
+        <div class="manage-msg" id="mixerMessage"></div>
+        <div id="mixerResultCardWrap"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. BOT対戦画面 -->
   <div class="view-section" id="viewMatch">
     <div class="match-setup-bar">
       <div>
@@ -916,7 +1108,7 @@
     <div class="match-log-box">
       <div class="panel-title" style="margin-bottom:8px;">試合実況ログ</div>
       <div class="log-list" id="matchLogList">
-        <div class="log-entry">オーダーを組んで「試合開始」を押すと、先発→中継ぎ→抑えの継投や6ステータスが反映された5イニング制の対戦が始まります。（勝利報酬: +300 / 引分: +100 / 敗北: +50）</div>
+        <div class="log-entry">オーダーを組んで「試合開始」を押すと、先発→中継ぎ→抑えの継投や6ステータス・コンボ補正が反映された5イニング制の対戦が始まります。（勝利報酬: +300 / 引分: +100 / 敗北: +50）</div>
       </div>
     </div>
   </div>
@@ -935,6 +1127,15 @@
   let inventory = [];
   let isMatchRunning = false;
   let selectedManageId = null;
+
+  // ミキサー状態
+  const MIXER_CONFIG = {
+    s3: { rank: 'S', count: 3, label: 'Sランクミキサー', desc: 'Sランク選手3枚を消費し、素材以外のSランク選手1体をランダム獲得します。' },
+    a5: { rank: 'A', count: 5, label: 'Aランクミキサー', desc: 'Aランク選手5枚を消費し、Aランク(80%)またはSランク(20%)の選手1体をランダム獲得します。' },
+    b8: { rank: 'B', count: 8, label: 'Bランクミキサー', desc: 'Bランク選手8枚を消費し、Bランク(75%)またはAランク(25%)の選手1体をランダム獲得します。' }
+  };
+  let mixerMode = 's3';
+  let selectedMixerIds = new Set();
 
   // 12球団 各10名（先発・中継ぎ・抑え・捕手・一塁手・二塁手・三塁手・遊撃手・外野手）＝全120名
   const MASTER_PLAYERS = [
@@ -1100,6 +1301,102 @@
     { key: "CL", label: "抑え", group: "投手陣", acceptPos: ["抑え"] }
   ];
 
+  // コンボ定義（⭐︎1:+20 / ⭐︎2:+40 / ⭐︎3:+80 / ⭐︎4:+200 ※⭐︎4は純正コンボかオールBランクのみ）
+  const COMBO_DEFS = [
+    {
+      id: "c4_pure",
+      star: 4,
+      bonus: 200,
+      name: "12球団純正魂",
+      condText: "12枠すべて同じ球団の選手",
+      check: (players) => {
+        if (players.length < 12) return false;
+        const t = players[0].team;
+        return players.every(p => p.team === t);
+      }
+    },
+    {
+      id: "c4_all_b",
+      star: 4,
+      bonus: 200,
+      name: "オールBランク下剋上",
+      condText: "12枠すべてBランク選手",
+      check: (players) => players.length === 12 && players.every(p => p.rank === 'B')
+    },
+    {
+      id: "c3_s_lineup",
+      star: 3,
+      bonus: 80,
+      name: "スター軍団",
+      condText: "オーダーにSランク6人以上",
+      check: (players) => players.filter(p => p.rank === 'S').length >= 6
+    },
+    {
+      id: "c3_team_6",
+      star: 3,
+      bonus: 80,
+      name: "球団主力結束",
+      condText: "同一球団の選手を6人以上起用",
+      check: (players) => {
+        const counts = {};
+        players.forEach(p => { counts[p.team] = (counts[p.team] || 0) + 1; });
+        return Object.values(counts).some(c => c >= 6);
+      }
+    },
+    {
+      id: "c2_sluggers",
+      star: 2,
+      bonus: 40,
+      name: "超重量クリーンアップ",
+      condText: "パワー80以上の選手が4人以上",
+      check: (players) => players.filter(p => p.stats.pow >= 80).length >= 4
+    },
+    {
+      id: "c2_speedsters",
+      star: 2,
+      bonus: 40,
+      name: "韋駄天機動力",
+      condText: "走力80以上の選手が4人以上",
+      check: (players) => players.filter(p => p.stats.spd >= 80).length >= 4
+    },
+    {
+      id: "c2_defense",
+      star: 2,
+      bonus: 40,
+      name: "鉄壁守備陣",
+      condText: "捕球78以上の選手が5人以上",
+      check: (players) => players.filter(p => p.stats.fld >= 78).length >= 5
+    },
+    {
+      id: "c1_s_one",
+      star: 1,
+      bonus: 20,
+      name: "エース＆主砲降臨",
+      condText: "オーダーにSランク1人以上",
+      check: (players) => players.some(p => p.rank === 'S')
+    },
+    {
+      id: "c1_team_3",
+      star: 1,
+      bonus: 20,
+      name: "同郷トリオ",
+      condText: "同一球団の選手を3人以上起用",
+      check: (players) => {
+        const counts = {};
+        players.forEach(p => { counts[p.team] = (counts[p.team] || 0) + 1; });
+        return Object.values(counts).some(c => c >= 3);
+      }
+    },
+    {
+      id: "c1_shoulder",
+      star: 1,
+      bonus: 20,
+      name: "強肩リレー",
+      condText: "肩力80以上の選手が3人以上",
+      check: (players) => players.filter(p => p.stats.arm >= 80).length >= 3
+    }
+  ];
+
   let lineup = {
     C: null, "1B": null, "2B": null, "3B": null, SS: null,
     LF: null, CF: null, RF: null, DH: null,
@@ -1120,7 +1417,6 @@
 
   function recomputePlayerStats(player) {
     const master = MASTER_PLAYERS.find(m => m.baseId === player.baseId);
-    // 限界突破はSランクのみ適用
     const lb = player.rank === 'S' ? (player.lbCount || 0) : 0;
     const delta = RANK_DELTA[player.rank] + lb;
     player.stats = {
@@ -1155,20 +1451,39 @@
     return `ミ${s.con} パ${s.pow} 走${s.spd} 捕${s.fld} 送${s.thr} 肩${s.arm}`;
   }
 
+  // 現在のオーダーから発動中コンボと合計ボーナスを算出
+  function evaluateLineupCombos(playersArray) {
+    const active = COMBO_DEFS.filter(c => c.check(playersArray));
+    const bonus = active.reduce((sum, c) => sum + c.bonus, 0);
+    return { active, bonus };
+  }
+
+  function getCurrentLineupPlayersArray() {
+    const arr = [];
+    ORDER_SLOTS.forEach(slot => {
+      const p = inventory.find(x => x.instanceId === lineup[slot.key]);
+      if (p) arr.push(p);
+    });
+    return arr;
+  }
+
   function switchTab(tab) {
     if (isMatchRunning) return;
     document.getElementById('tabGacha').classList.toggle('active', tab === 'gacha');
     document.getElementById('tabOrder').classList.toggle('active', tab === 'order');
     document.getElementById('tabManage').classList.toggle('active', tab === 'manage');
+    document.getElementById('tabMixer').classList.toggle('active', tab === 'mixer');
     document.getElementById('tabMatch').classList.toggle('active', tab === 'match');
 
     document.getElementById('viewGacha').classList.toggle('active', tab === 'gacha');
     document.getElementById('viewOrder').classList.toggle('active', tab === 'order');
     document.getElementById('viewManage').classList.toggle('active', tab === 'manage');
+    document.getElementById('viewMixer').classList.toggle('active', tab === 'mixer');
     document.getElementById('viewMatch').classList.toggle('active', tab === 'match');
 
     if (tab === 'order') renderOrderView();
     if (tab === 'manage') renderManageView();
+    if (tab === 'mixer') renderMixerView();
     if (tab === 'match') updateMatchReadyState();
   }
 
@@ -1242,14 +1557,15 @@
     });
   }
 
-  // オーダー編成画面
+  // オーダー編成＆コンボ表示
   function renderOrderView() {
     const slotsContainer = document.getElementById('orderSlotsContainer');
     slotsContainer.innerHTML = '';
 
-    let totalPower = 0;
+    let basePower = 0;
     let filledCount = 0;
     let lastGroup = "";
+    const placedPlayers = [];
 
     ORDER_SLOTS.forEach(slot => {
       if (slot.group !== lastGroup) {
@@ -1264,8 +1580,9 @@
       const player = inventory.find(p => p.instanceId === assignedId);
 
       if (player) {
-        totalPower += player.power;
+        basePower += player.power;
         filledCount++;
+        placedPlayers.push(player);
       }
 
       const row = document.createElement('div');
@@ -1305,10 +1622,44 @@
       slotsContainer.appendChild(row);
     });
 
+    const { active, bonus } = evaluateLineupCombos(placedPlayers);
+    const totalPower = basePower + bonus;
+
     document.getElementById('teamPower').textContent = totalPower;
+    document.getElementById('comboBonusBadge').textContent = `コンボ +${bonus}`;
+    document.getElementById('comboTotalText').textContent = `基礎 ${basePower} + コンボ ${bonus} = ${totalPower}`;
     document.getElementById('orderFilledCount').textContent = filledCount;
     document.getElementById('totalBoxCount').textContent = inventory.length;
 
+    // 発動中コンボチップ描画
+    const activeListEl = document.getElementById('activeCombosList');
+    activeListEl.innerHTML = '';
+    if (active.length === 0) {
+      activeListEl.innerHTML = '<div style="font-size:0.8rem; color:#888;">現在発動中のコンボはありません。</div>';
+    } else {
+      active.forEach(c => {
+        const stars = '⭐︎'.repeat(c.star);
+        const chip = document.createElement('div');
+        chip.className = `combo-chip ${c.star === 4 ? 'star4' : ''}`;
+        chip.textContent = `${stars} ${c.name} (+${c.bonus})`;
+        activeListEl.appendChild(chip);
+      });
+    }
+
+    // 全コンボ条件一覧描画
+    const activeIds = new Set(active.map(c => c.id));
+    const guideEl = document.getElementById('comboGuideGrid');
+    guideEl.innerHTML = '';
+    COMBO_DEFS.forEach(c => {
+      const isOn = activeIds.has(c.id);
+      const stars = '⭐︎'.repeat(c.star);
+      const div = document.createElement('div');
+      div.className = `combo-guide-item ${isOn ? 'is-on' : ''}`;
+      div.textContent = `${stars}(+${c.bonus}) ${c.name}：${c.condText}`;
+      guideEl.appendChild(div);
+    });
+
+    // 右側：所持選手一覧
     const currentSlotDef = ORDER_SLOTS.find(s => s.key === selectedSlotKey);
     document.getElementById('slotFilterInfo').textContent =
       `選択中枠: 【${currentSlotDef.label}】 (適性: ${currentSlotDef.acceptPos.join(' / ')})`;
@@ -1423,7 +1774,7 @@
     updateHeaderUI();
   }
 
-  // 限界突破・売却画面（限界突破はSランクのみ可能）
+  // 限界突破・売却画面
   function getAssignedInstanceSet() {
     const s = new Set();
     Object.values(lineup).forEach(id => { if (id) s.add(id); });
@@ -1525,7 +1876,7 @@
         <div class="lb-action-card">
           <div style="font-weight:bold; color:#ffd700; font-size:0.9rem;">限界突破（Sランクのみ可能）</div>
           <div class="lb-note-locked">
-            ※ 限界突破はSランク選手のみ可能です（${target.rank}ランク選手は売却のみ利用できます）。
+            ※ 限界突破はSランク選手のみ可能です（${target.rank}ランク選手は売却・ミキサー素材として利用できます）。
           </div>
         </div>
       `;
@@ -1613,6 +1964,161 @@
     renderManageView(`${soldName} を売却して ${gain} 資金を獲得しました。`);
   }
 
+  // ミキサー画面
+  function setMixerMode(mode) {
+    mixerMode = mode;
+    selectedMixerIds.clear();
+    document.getElementById('modeS3').classList.toggle('active', mode === 's3');
+    document.getElementById('modeA5').classList.toggle('active', mode === 'a5');
+    document.getElementById('modeB8').classList.toggle('active', mode === 'b8');
+    document.getElementById('mixerMessage').textContent = '';
+    document.getElementById('mixerResultCardWrap').innerHTML = '';
+    renderMixerView();
+  }
+
+  function renderMixerView() {
+    const cfg = MIXER_CONFIG[mixerMode];
+    const assignedSet = getAssignedInstanceSet();
+
+    // 選択中のIDが現在のランク対象でなくなっているものを整理
+    [...selectedMixerIds].forEach(id => {
+      const p = inventory.find(x => x.instanceId === id);
+      if (!p || p.rank !== cfg.rank || assignedSet.has(id)) {
+        selectedMixerIds.delete(id);
+      }
+    });
+
+    document.getElementById('mixerCandidateTitle').textContent =
+      `投入する${cfg.rank}ランク選手を選択 (${selectedMixerIds.size} / ${cfg.count}枚)`;
+    document.getElementById('mixerRuleDesc').textContent = cfg.desc;
+
+    const listEl = document.getElementById('mixerCandidateList');
+    listEl.innerHTML = '';
+
+    // 対象ランクの選手を先頭に表示
+    const sorted = [...inventory].sort((a, b) => {
+      const aMatch = a.rank === cfg.rank ? 1 : 0;
+      const bMatch = b.rank === cfg.rank ? 1 : 0;
+      if (aMatch !== bMatch) return bMatch - aMatch;
+      return b.power - a.power;
+    });
+
+    if (sorted.length === 0) {
+      listEl.innerHTML = '<div style="color:#888; padding:10px;">所持選手がいません。</div>';
+    } else {
+      sorted.forEach(p => {
+        const isAssigned = assignedSet.has(p.instanceId);
+        const isRightRank = p.rank === cfg.rank;
+        const isPicked = selectedMixerIds.has(p.instanceId);
+        const isDisabled = !isRightRank || isAssigned || (!isPicked && selectedMixerIds.size >= cfg.count);
+
+        const div = document.createElement('div');
+        div.className = `mixer-select-item ${isPicked ? 'picked' : ''} ${isDisabled ? 'disabled-item' : ''}`;
+
+        let note = '';
+        if (isAssigned) note = ' [オーダー中]';
+        else if (!isRightRank) note = ` [${p.rank}ランク対象外]`;
+
+        div.innerHTML = `
+          <div>
+            <span class="rank-pill pill-${p.rank}">${p.rank}</span>
+            <strong>${p.name}</strong>
+            <span style="font-size:0.74rem; color:#bbb;">[${p.team}/${p.pos}]${note}</span>
+          </div>
+          <div style="font-size:0.82rem; font-weight:bold; color:${isPicked ? '#00ffcc' : '#ccc'};">
+            ${isPicked ? '選択中 ✓' : `総合 ${p.power}`}
+          </div>
+        `;
+
+        div.onclick = () => {
+          if (!isRightRank || isAssigned) return;
+          if (selectedMixerIds.has(p.instanceId)) {
+            selectedMixerIds.delete(p.instanceId);
+          } else {
+            if (selectedMixerIds.size >= cfg.count) return;
+            selectedMixerIds.add(p.instanceId);
+          }
+          renderMixerView();
+        };
+        listEl.appendChild(div);
+      });
+    }
+
+    const pickedPlayers = [...selectedMixerIds]
+      .map(id => inventory.find(x => x.instanceId === id))
+      .filter(Boolean);
+
+    const summaryEl = document.getElementById('mixerPickedSummary');
+    if (pickedPlayers.length === 0) {
+      summaryEl.innerHTML = `<span style="color:#888;">あと ${cfg.count} 枚選択してください。</span>`;
+    } else {
+      summaryEl.innerHTML = pickedPlayers
+        .map(p => `・[${p.rank}] ${p.name} (${p.team}/${p.pos})`)
+        .join('<br>');
+    }
+
+    document.getElementById('btnExecMixer').disabled = pickedPlayers.length !== cfg.count;
+  }
+
+  function executeMixer() {
+    const cfg = MIXER_CONFIG[mixerMode];
+    if (selectedMixerIds.size !== cfg.count) return;
+
+    const consumedPlayers = [...selectedMixerIds]
+      .map(id => inventory.find(x => x.instanceId === id))
+      .filter(Boolean);
+
+    // 投入選手を削除
+    inventory = inventory.filter(p => !selectedMixerIds.has(p.instanceId));
+    selectedMixerIds.clear();
+
+    // 排出ランク抽選
+    let outRank = 'B';
+    const r = Math.random() * 100;
+    if (mixerMode === 's3') {
+      outRank = 'S';
+    } else if (mixerMode === 'a5') {
+      outRank = r < 20 ? 'S' : 'A';
+    } else if (mixerMode === 'b8') {
+      outRank = r < 25 ? 'A' : 'B';
+    }
+
+    // Sランクミキサーの場合は投入した素材選手と被らないように抽選（全候補が同じなら全体から）
+    let candidateMasters = MASTER_PLAYERS;
+    if (mixerMode === 's3') {
+      const consumedBaseSet = new Set(consumedPlayers.map(p => p.baseId));
+      const filtered = MASTER_PLAYERS.filter(m => !consumedBaseSet.has(m.baseId));
+      if (filtered.length > 0) candidateMasters = filtered;
+    }
+
+    const chosenMaster = candidateMasters[Math.floor(Math.random() * candidateMasters.length)];
+    const newPlayer = createPlayerInstance(chosenMaster, outRank);
+    inventory.push(newPlayer);
+
+    updateHeaderUI();
+    renderMixerView();
+
+    document.getElementById('mixerMessage').textContent =
+      `ミキサー完了！${outRank}ランク「${newPlayer.name} (${newPlayer.team})」を獲得しました！`;
+
+    const s = newPlayer.stats;
+    document.getElementById('mixerResultCardWrap').innerHTML = `
+      <div class="card rank-${newPlayer.rank}" style="opacity:1; transform:scale(1); max-width:210px; margin:6px auto 0;">
+        <div class="rank-badge">${newPlayer.rank}</div>
+        <div class="meta-line">
+          <span class="pos-badge">${newPlayer.pos}</span>
+          <span class="team-badge">${newPlayer.team}</span>
+        </div>
+        <div class="player-name">${newPlayer.name}</div>
+        <div class="stat-mini-grid">
+          <span>ミ${s.con}</span><span>パ${s.pow}</span><span>走${s.spd}</span>
+          <span>捕${s.fld}</span><span>送${s.thr}</span><span>肩${s.arm}</span>
+        </div>
+        <div class="ovr-badge">総合: ${newPlayer.power}</div>
+      </div>
+    `;
+  }
+
   // BOT対戦関連
   function getFilledLineupPlayers() {
     const map = {};
@@ -1677,7 +2183,7 @@
     return { pitcher: teamMap['CL'], roleLabel: '抑え' };
   }
 
-  function simPlateAppearance(batter, pitcher, defenseMap, runners) {
+  function simPlateAppearance(batter, pitcher, defenseMap, runners, comboBoost = 0) {
     const s = batter.stats;
     const p = pitcher.stats;
 
@@ -1687,11 +2193,11 @@
     const avgArm = fielders.reduce((acc, x) => acc + x.stats.arm, 0) / fielders.length;
 
     const pitchPower = p.arm * 0.55 + p.fld * 0.25 + p.thr * 0.20;
-    const contactScore = s.con - pitchPower * 0.65 - (avgFld - 70) * 0.25;
-    const hitProb = Math.max(0.14, Math.min(0.46, 0.28 + contactScore * 0.0045));
+    const contactScore = s.con + comboBoost * 0.04 - pitchPower * 0.65 - (avgFld - 70) * 0.25;
+    const hitProb = Math.max(0.14, Math.min(0.48, 0.28 + contactScore * 0.0045));
 
-    const powerEdge = (s.pow - p.arm) * 0.0022;
-    const hrProb = Math.max(0.01, Math.min(0.16, 0.045 + (s.pow - 65) * 0.0022 + powerEdge));
+    const powerEdge = (s.pow + comboBoost * 0.04 - p.arm) * 0.0022;
+    const hrProb = Math.max(0.01, Math.min(0.18, 0.045 + (s.pow - 65) * 0.0022 + powerEdge));
 
     const errorProb = Math.max(0.01, Math.min(0.09, 0.035 + (72 - avgFld) * 0.0018));
 
@@ -1836,6 +2342,9 @@
     };
     document.getElementById('botTeamLabel').textContent = botLabelMap[botLevel];
 
+    const pCombo = evaluateLineupCombos(Object.values(playerMap));
+    const bCombo = evaluateLineupCombos(Object.values(botMap));
+
     const battingKeys = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH'];
     const pBatters = battingKeys.map(k => playerMap[k]);
     const bBatters = battingKeys.map(k => botMap[k]);
@@ -1845,7 +2354,10 @@
     let pTotal = 0;
     let bTotal = 0;
 
-    appendLog(`試合開始！自軍先発: ${playerMap['SP'].name}(${playerMap['SP'].rank}) vs ${botLabelMap[botLevel]}先発: ${botMap['SP'].name}(${botMap['SP'].rank})`, 'inning-hdr');
+    appendLog(
+      `試合開始！自軍先発: ${playerMap['SP'].name}(${playerMap['SP'].rank}) [コンボ+${pCombo.bonus}] vs ${botLabelMap[botLevel]}先発: ${botMap['SP'].name}(${botMap['SP'].rank}) [コンボ+${bCombo.bonus}]`,
+      'inning-hdr'
+    );
 
     for (let inning = 1; inning <= 5; inning++) {
       const bPitchInfo = getPitcherForInning(botMap, inning);
@@ -1863,7 +2375,7 @@
         pBatIdx++;
         document.getElementById('situationDisplay').textContent = `アウト: ${outs} | 走者: ${runners.map((r, idx) => r ? (idx+1)+'塁' : '').filter(Boolean).join(',') || 'なし'}`;
 
-        const res = simPlateAppearance(batter, bPitchInfo.pitcher, botMap, runners);
+        const res = simPlateAppearance(batter, bPitchInfo.pitcher, botMap, runners, pCombo.bonus);
         runners = res.nextRunners;
         inningRunsP += res.runs;
         pTotal += res.runs;
@@ -1892,7 +2404,7 @@
         bBatIdx++;
         document.getElementById('situationDisplay').textContent = `アウト: ${outs} | 走者: ${runners.map((r, idx) => r ? (idx+1)+'塁' : '').filter(Boolean).join(',') || 'なし'}`;
 
-        const res = simPlateAppearance(batter, pPitchInfo.pitcher, playerMap, runners);
+        const res = simPlateAppearance(batter, pPitchInfo.pitcher, playerMap, runners, bCombo.bonus);
         runners = res.nextRunners;
         inningRunsB += res.runs;
         bTotal += res.runs;
@@ -1951,14 +2463,18 @@
     money = INITIAL_MONEY;
     inventory = [];
     selectedManageId = null;
+    selectedMixerIds.clear();
     Object.keys(lineup).forEach(k => lineup[k] = null);
     document.getElementById('cardsGrid').innerHTML = '';
     document.getElementById('resultTitle').textContent = 'スカウトボタンを押して12球団の選手を獲得しよう！';
     document.getElementById('manageMessage').textContent = '';
+    document.getElementById('mixerMessage').textContent = '';
+    document.getElementById('mixerResultCardWrap').innerHTML = '';
     clearScoreboard();
     updateHeaderUI();
     renderOrderView();
     renderManageView();
+    renderMixerView();
     updateMatchReadyState();
   }
 
